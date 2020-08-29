@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TodoList from './TodoList.js';
+import TaskList from './TaskList.js';
 import TextArea from './TextArea';
 
 class TodoApp extends React.Component {
@@ -32,7 +32,7 @@ class TodoApp extends React.Component {
     return (
       <div>
         <h1>Todo</h1>
-        <TodoList list={this.state.list} onClick={this.onClick} />
+        <TaskList list={this.state.list} onClick={this.onClick} />
         <TextArea onChange={this.handleChange} />
       </div >
     );

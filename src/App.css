@@ -40,3 +40,18 @@
 body {
 	margin: 20px;
 }
+
+.item {
+	display: flex;
+}
+
+.color {
+	height: 18px;
+	width: 9px;
+	background-color: lightblue;
+	margin: 0px 10px 13px 0px;
+}
+
+.todoContent {
+	font-weight: 700;
+}

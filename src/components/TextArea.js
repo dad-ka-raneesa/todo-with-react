@@ -16,13 +16,10 @@ class TextArea extends React.Component {
 
   onKeyPress(event) {
     let inputValue = event.target.value;
-    if (event.charCode === 13) {
+    if (event.charCode === 13 && inputValue !== '') {
       this.props.onChange(inputValue);
-      inputValue = '';
+      this.setState({ inputValue: '' });
     }
-    this.setState({
-      inputValue
-    })
   }
 
   render() {

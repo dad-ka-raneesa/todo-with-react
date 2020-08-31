@@ -1,5 +1,4 @@
 import React from 'react';
-
 import TaskList from './TaskList.js';
 import TextArea from './TextArea';
 
@@ -9,20 +8,21 @@ class TodoApp extends React.Component {
     this.state = { list: [] };
     this.handleChange = this.handleChange.bind(this);
     this.changeTaskIsInDue = this.changeTaskIsInDue.bind(this);
+    this.changeTaskIsInProgress = this.changeTaskIsInProgress.bind(this);
     this.changeTaskIsCompleted = this.changeTaskIsCompleted.bind(this);
   }
 
   handleChange(content) {
-    this.setState((state) => {
-      let list = state.list.slice();
-      list.push({ content, status: { isDone: false, isInProgress: false } });
-      return { list };
+    this.setState(({ list }) => {
+      let newList = list.slice();
+      newList.push({ content, status: { isDone: false, isInProgress: false } });
+      return { list: newList };
     })
   }
 
   updateStatus(id, status) {
     this.setState(({ list }) => {
-      const newList = list.map((task) => ({ ...task }));
+      const newList = list.slice();
       newList[id].status = status;
       return { list: newList };
     });
@@ -30,6 +30,10 @@ class TodoApp extends React.Component {
 
   changeTaskIsInDue(id) {
     this.updateStatus(id, { isDone: false, isInProgress: false });
+  }
+
+  changeTaskIsInProgress(id) {
+    this.updateStatus(id, { isDone: false, isInProgress: true });
   }
 
   changeTaskIsCompleted(id) {
@@ -41,8 +45,9 @@ class TodoApp extends React.Component {
       <div>
         <h1>Todo</h1>
         <TaskList list={this.state.list}
-          onComplete={this.changeTaskIsCompleted}
           onDue={this.changeTaskIsInDue}
+          onProgress={this.changeTaskIsInProgress}
+          onComplete={this.changeTaskIsCompleted}
         />
         <TextArea onChange={this.handleChange} />
       </div >

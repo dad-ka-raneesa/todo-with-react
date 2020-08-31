@@ -8,7 +8,7 @@ class TodoApp extends React.Component {
     super(props);
     this.state = { list: [] };
     this.handleChange = this.handleChange.bind(this);
-    this.onClick = this.onClick.bind(this);
+    this.updateStatus = this.updateStatus.bind(this);
   }
 
   handleChange(content) {
@@ -19,7 +19,7 @@ class TodoApp extends React.Component {
     })
   }
 
-  onClick(id) {
+  updateStatus(id) {
     this.setState(({ list }) => {
       const newList = list.map((task) => ({ ...task }));
       newList[id].isDone = !newList[id].isDone;
@@ -31,7 +31,7 @@ class TodoApp extends React.Component {
     return (
       <div>
         <h1>Todo</h1>
-        <TaskList list={this.state.list} onClick={this.onClick} />
+        <TaskList list={this.state.list} onClick={this.updateStatus} />
         <TextArea onChange={this.handleChange} />
       </div >
     );

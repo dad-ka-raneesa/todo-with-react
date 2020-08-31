@@ -4,7 +4,7 @@ import '../task.css';
 const Task = ({ task, id, onClick }) => {
   const taskStatus = task.isDone ? 'done' : 'notDone';
   return (
-    <div className={`taskContainer ${taskStatus}`} onClick={() => onClick(id, task.isDone)}>
+    <div className={`taskContainer ${taskStatus}`} onClick={() => onClick(id)}>
       <span className="taskColor"></span>
       <span className="taskContent" >{task.content}</span>
     </div >

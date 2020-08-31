@@ -19,13 +19,12 @@ class TodoApp extends React.Component {
     })
   }
 
-  onClick(id, status) {
-    this.setState((state) => {
-      const list = state.list.slice();
-      const todo = list[id];
-      todo.isDone = !status;
-      return { list };
-    })
+  onClick(id) {
+    this.setState(({ list }) => {
+      const newList = list.map((task) => ({ ...task }));
+      newList[id].isDone = !newList[id].isDone;
+      return { list: newList };
+    });
   }
 
   render() {

@@ -7,11 +7,11 @@
 	width: 9px;
 }
 
-.notDone .taskColor {
+.todo .taskColor {
 	background-color: lightblue;
 }
 
-.progressing .taskColor {
+.doing .taskColor {
 	background-color: orange;
 }
 
@@ -29,6 +29,6 @@
 	text-decoration: line-through;
 }
 
-.notDone .taskContent {
+.todo .taskContent {
 	text-decoration: none;
 }

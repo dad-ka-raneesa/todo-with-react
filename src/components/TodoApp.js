@@ -1,12 +1,13 @@
 import React from 'react';
 import TaskList from './TaskList.js';
-import TextArea from './TextArea';
+import InputBar from './InputBar';
+import TodoTitle from './TodoTitle';
 import { getNextStatus, getDefaultStatus } from './statuses';
 
 class TodoApp extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { list: [] };
+    this.state = { title: 'TODO', list: [] };
     this.handleChange = this.handleChange.bind(this);
     this.updateStatus = this.updateStatus.bind(this);
   }
@@ -29,11 +30,11 @@ class TodoApp extends React.Component {
   render() {
     return (
       <div>
-        <h1>Todo</h1>
+        <TodoTitle value={this.state.title} />
         <TaskList list={this.state.list}
           onClick={this.updateStatus}
         />
-        <TextArea onChange={this.handleChange} />
+        <InputBar value='' onChange={this.handleChange} />
       </div >
     );
   }

@@ -24,6 +24,7 @@ class InputBar extends React.Component {
     return (
       <input
         type='text'
+        className='inputBar'
         value={this.state.inputValue}
         onChange={this.handleChange}
         onKeyPress={this.onKeyPress}></input>

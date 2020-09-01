@@ -1,6 +1,5 @@
 import React from 'react';
 import InputBar from './InputBar';
-import '../todoTitle.css';
 
 class TodoTitle extends React.Component {
   constructor(props) {

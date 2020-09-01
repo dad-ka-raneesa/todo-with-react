@@ -1,3 +1,20 @@
+body {
+	margin: 30px;
+}
+
+.title {
+	font-weight: 700;
+	margin: 20px 0px;
+	font-size: 22px;
+	cursor: pointer;
+}
+
+.inputBar {
+	font-size: inherit;
+	font-weight: inherit;
+	width: 200px;
+}
+
 .taskContainer {
 	display: flex;
 }

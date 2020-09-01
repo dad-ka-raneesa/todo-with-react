@@ -10,6 +10,7 @@ class TodoApp extends React.Component {
     this.state = { title: 'TODO', list: [] };
     this.handleChange = this.handleChange.bind(this);
     this.updateStatus = this.updateStatus.bind(this);
+    this.updateTitle = this.updateTitle.bind(this);
   }
 
   handleChange(content) {
@@ -27,14 +28,17 @@ class TodoApp extends React.Component {
     });
   }
 
+  updateTitle(title) {
+    this.setState({ title });
+  }
+
   render() {
     return (
       <div>
-        <TodoTitle value={this.state.title} />
-        <TaskList list={this.state.list}
-          onClick={this.updateStatus}
+        <TodoTitle value={this.state.title} onChange={this.updateTitle} />
+        <TaskList list={this.state.list} onClick={this.updateStatus}
         />
-        <InputBar value='' onChange={this.handleChange} />
+        <InputBar onChange={this.handleChange} />
       </div >
     );
   }

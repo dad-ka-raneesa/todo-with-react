@@ -3,9 +3,9 @@ body {
 }
 
 .title {
-	font-weight: 700;
+	font-weight: bold;
 	margin: 20px 0px;
-	font-size: 22px;
+	font-size: 18px;
 	cursor: pointer;
 }
 
@@ -17,11 +17,14 @@ body {
 
 .taskContainer {
 	display: flex;
+	margin: 13px 0px;
+	cursor: pointer;
 }
 
 .taskIcon {
 	height: 18px;
 	width: 9px;
+	margin-right: 10px;
 }
 
 .todo .taskIcon {
@@ -37,15 +40,26 @@ body {
 }
 
 .taskContent {
-	font-weight: 700;
-	margin: 0px 0px 13px 10px;
-	cursor: pointer;
+	font-weight: bold;
+	display: flex;
+	width: 180px;
+	justify-content: space-between;
 }
 
-.done .taskContent {
+.done .taskContent span {
 	text-decoration: line-through;
 }
 
 .todo .taskContent {
 	text-decoration: none;
+}
+
+.deleteTaskBtn {
+	display: none;
+	color: grey;
+	font-weight: bold;
+}
+
+.taskContent:hover .deleteTaskBtn {
+	display: block;
 }

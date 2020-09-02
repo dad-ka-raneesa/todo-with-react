@@ -3,7 +3,6 @@ import TaskList from './TaskList.js';
 import InputBar from './InputBar';
 import TodoTitle from './TodoTitle';
 import { getNextStatus, getDefaultStatus } from './statuses';
-import '../todo.css';
 
 class TodoApp extends React.Component {
   constructor(props) {

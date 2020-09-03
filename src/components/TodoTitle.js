@@ -19,10 +19,19 @@ class TodoTitle extends React.Component {
   }
 
   render() {
-    const header = <span onClick={this.handleClick}> {this.props.value}</span>;
-    const input = <InputBar value={this.props.value} onChange={this.handleTitleChange} />
+    const header = (
+      <div className="title">
+        <span onClick={this.handleClick}> {this.props.value}</span>
+        <div className="deleteTasksBtn" onClick={() => this.props.onDelete()}>X</div>
+      </div>
+    );
+    const input = (
+      <div className="title">
+        <InputBar value={this.props.value} onChange={this.handleTitleChange} />
+      </div>
+    );
 
-    return (<div className="title">{this.state.isEditable ? input : header}</div>);
+    return (this.state.isEditable ? input : header);
   }
 }
 

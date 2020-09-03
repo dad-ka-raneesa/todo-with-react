@@ -12,6 +12,7 @@ class TodoApp extends React.Component {
     this.updateStatus = this.updateStatus.bind(this);
     this.updateTitle = this.updateTitle.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
+    this.deleteTasks = this.deleteTasks.bind(this);
   }
 
   handleChange(content) {
@@ -40,10 +41,14 @@ class TodoApp extends React.Component {
     });
   }
 
+  deleteTasks() {
+    this.setState({ list: [] });
+  }
+
   render() {
     return (
       <div>
-        <TodoTitle value={this.state.title} onChange={this.updateTitle} />
+        <TodoTitle value={this.state.title} onChange={this.updateTitle} onDelete={this.deleteTasks} />
         <TaskList list={this.state.list} onClick={this.updateStatus} onDelete={this.deleteTask} />
         <InputBar onChange={this.handleChange} />
       </div >

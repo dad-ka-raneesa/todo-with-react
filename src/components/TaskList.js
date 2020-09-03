@@ -2,8 +2,8 @@ import React from 'react';
 import Task from './Task';
 
 const TaskList = (props) => {
-  const list = props.list.map((task, id) => (
-    <Task task={task} key={id} id={id}
+  const list = props.list.map((task) => (
+    <Task task={task} key={task.id}
       onClick={props.onClick}
       onDelete={props.onDelete}
     />

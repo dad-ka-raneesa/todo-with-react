@@ -1,4 +1,5 @@
 import React from 'react';
+import uuid from 'uuid';
 import TaskList from './TaskList.js';
 import InputBar from './InputBar';
 import TodoTitle from './TodoTitle';
@@ -8,24 +9,24 @@ class TodoApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = { title: 'TODO', list: [] };
-    this.handleChange = this.handleChange.bind(this);
+    this.addTask = this.addTask.bind(this);
     this.updateStatus = this.updateStatus.bind(this);
     this.updateTitle = this.updateTitle.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
     this.deleteTasks = this.deleteTasks.bind(this);
   }
 
-  handleChange(content) {
+  addTask(content) {
     this.setState(({ list }) => ({
-      list: list.concat({ content, status: getDefaultStatus() })
+      list: list.concat({ id: uuid(), content, status: getDefaultStatus() })
     }))
   }
 
   updateStatus(id) {
     this.setState(({ list }) => {
       const newList = list.map((task) => ({ ...task }));
-      const task = newList[id];
-      task.status = getNextStatus(task.status);
+      const taskToUpdate = newList.find((task) => task.id === id);
+      taskToUpdate.status = getNextStatus(taskToUpdate.status);
       return { list: newList };
     });
   }
@@ -35,10 +36,9 @@ class TodoApp extends React.Component {
   }
 
   deleteTask(id) {
-    this.setState(({ list }) => {
-      const newList = list.filter((_task, index) => index !== id);
-      return { list: newList }
-    });
+    this.setState(({ list }) => ({
+      list: list.filter((task) => task.id !== id),
+    }));
   }
 
   deleteTasks() {
@@ -50,7 +50,7 @@ class TodoApp extends React.Component {
       <div>
         <TodoTitle value={this.state.title} onChange={this.updateTitle} onDelete={this.deleteTasks} />
         <TaskList list={this.state.list} onClick={this.updateStatus} onDelete={this.deleteTask} />
-        <InputBar onChange={this.handleChange} />
+        <InputBar onChange={this.addTask} />
       </div >
     );
   }

@@ -5,8 +5,8 @@ const Task = ({ task, id, onClick, onDelete }) => {
     <div className={`taskContainer ${task.status}`}>
       <div className="taskIcon"></div>
       <div className="taskContent">
-        <span onClick={() => onClick(id)}>{task.content}</span>
-        <div className="deleteTaskBtn" onClick={() => onDelete(id)}>X</div>
+        <span onClick={() => onClick(task.id)}>{task.content}</span>
+        <div className="deleteTaskBtn" onClick={() => onDelete(task.id)}>X</div>
       </div>
     </div >
   );

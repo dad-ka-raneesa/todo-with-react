@@ -1,38 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import InputBar from './InputBar';
 
-class TodoTitle extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isEditable: false };
-    this.handleClick = this.handleClick.bind(this);
-    this.handleTitleChange = this.handleTitleChange.bind(this);
+const TodoTitle = function(props) {
+  const [isEditable, toggleEditable] = useState(false);
+
+  const updateTitle = function(title) {
+    toggleEditable(!isEditable);
+    props.updateTitle(title);
   }
 
-  handleClick() {
-    this.setState({ isEditable: true });
-  }
+  const title = (
+    <div className="title">
+      <span onClick={() => toggleEditable(!isEditable)}> {props.value}</span>
+      <div className="deleteTasksBtn" onClick={() => props.handleDelete()}>X</div>
+    </div>
+  );
 
-  handleTitleChange(value) {
-    this.setState({ isEditable: false });
-    this.props.onChange(value);
-  }
+  const inputBox = (
+    <div className="title">
+      <InputBar value={props.value} onSubmit={updateTitle} />
+    </div>
+  );
 
-  render() {
-    const header = (
-      <div className="title">
-        <span onClick={this.handleClick}> {this.props.value}</span>
-        <div className="deleteTasksBtn" onClick={() => this.props.onDelete()}>X</div>
-      </div>
-    );
-    const input = (
-      <div className="title">
-        <InputBar value={this.props.value} onChange={this.handleTitleChange} />
-      </div>
-    );
-
-    return (this.state.isEditable ? input : header);
-  }
+  return isEditable ? inputBox : title;
 }
 
 export default TodoTitle;

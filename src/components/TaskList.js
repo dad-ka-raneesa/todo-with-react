@@ -3,9 +3,9 @@ import Task from './Task';
 
 const TaskList = (props) => {
   const list = props.list.map((task) => (
-    <Task task={task} key={task.id}
-      onClick={props.onClick}
-      onDelete={props.onDelete}
+    <Task todo={task} key={task.id}
+      updateStatus={props.updateStatus}
+      handleDelete={props.handleDelete}
     />
   ))
 

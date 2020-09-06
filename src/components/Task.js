@@ -1,12 +1,13 @@
 import React from 'react';
 
-const Task = ({ task, id, onClick, onDelete }) => {
+const Task = ({ todo, updateStatus, handleDelete }) => {
+  const { id, task, status } = todo;
   return (
-    <div className={`taskContainer ${task.status}`}>
+    <div className={`taskContainer ${status}`}>
       <div className="taskIcon"></div>
       <div className="taskContent">
-        <span onClick={() => onClick(task.id)}>{task.content}</span>
-        <div className="deleteTaskBtn" onClick={() => onDelete(task.id)}>X</div>
+        <span onClick={() => updateStatus(id)}>{task}</span>
+        <div className="deleteTaskBtn" onClick={() => handleDelete(id)}>X</div>
       </div>
     </div >
   );

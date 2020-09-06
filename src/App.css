@@ -24,7 +24,7 @@ body {
 	display: block;
 }
 
-.inputBar {
+input {
 	font-size: inherit;
 	font-weight: inherit;
 	width: 200px;

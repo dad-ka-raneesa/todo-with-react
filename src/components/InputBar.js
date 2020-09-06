@@ -1,35 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-class InputBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { inputValue: this.props.value || '' };
-    this.handleChange = this.handleChange.bind(this);
-    this.onKeyPress = this.onKeyPress.bind(this);
-  }
+const InputBar = function(props) {
+  const [value, setValue] = useState(props.value);
 
-  handleChange(event) {
-    this.setState({ inputValue: event.target.value })
-  }
+  const handleChange = (event) => setValue(event.target.value);
 
-  onKeyPress(event) {
-    let inputValue = event.target.value.trim();
-    if (event.charCode === 13 && inputValue !== '') {
-      this.props.onChange(inputValue);
-      this.setState({ inputValue: '' });
+  const handleSubmit = function(event) {
+    event.preventDefault();
+    if (value) {
+      props.onSubmit(value);
+      setValue('');
     }
-  }
+  };
 
-  render() {
-    return (
-      <input
-        type='text'
-        className='inputBar'
-        value={this.state.inputValue}
-        onChange={this.handleChange}
-        onKeyPress={this.onKeyPress}></input>
-    );
-  }
-}
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" value={value} onChange={handleChange} />
+    </form>
+  );
+};
+
+InputBar.defaultProps = { value: '' };
 
 export default InputBar;

@@ -1,41 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TaskList from './TaskList.js';
 import InputBar from './InputBar';
 import TodoTitle from './TodoTitle';
-import { getNextStatus, getDefaultStatus } from './statuses';
+import apiCall from './apiCall';
+
+const setNewState = (setState, action) => apiCall(action).then(setState);
 
 const TodoApp = function(props) {
-  const [list, setTodoList] = useState([]);
-  const [lastId, setLastId] = useState(0);
-  const [title, setTitle] = useState('Todo');
+  const [{ title, list }, setState] = useState({ title: 'Todo', list: [] });
 
-  const reset = function() {
-    setTodoList([]);
-    setLastId(0);
-    setTitle('Todo');
-  };
+  const dispatch = setNewState.bind(null, setState);
+  const updateStatus = (id) => dispatch({ type: 'UPDATE_STATUS', id });
+  const removeTask = (id) => dispatch({ type: 'REMOVE_TASK', id });
+  const addTask = (task) => dispatch({ type: 'ADD_TASK', task });
+  const updateTitle = (title) => dispatch({ type: 'UPDATE_TITLE', title });
+  const removeAll = () => dispatch({ type: 'REMOVE_ALL' });
 
-  const addTask = function(task) {
-    setTodoList(list => [...list, { id: lastId, task, status: getDefaultStatus() }]);
-    setLastId(id => id + 1);
-  };
-
-  const removeTask = function(taskId) {
-    setTodoList(list => list.filter(task => task.id !== taskId));
-  }
-
-  const updateStatus = function(taskId) {
-    setTodoList(list => {
-      const newList = list.map((task) => ({ ...task }));
-      const taskToUpdate = newList.find((task) => task.id === taskId);
-      taskToUpdate.status = getNextStatus(taskToUpdate.status);
-      return newList;
-    })
-  }
+  useEffect(() => {
+    dispatch({}); 
+  }, []);
 
   return (
     <div>
-      <TodoTitle value={title} updateTitle={setTitle} handleDelete={reset} />
+      <TodoTitle value={title} updateTitle={updateTitle} handleDelete={removeAll} />
       <TaskList list={list} updateStatus={updateStatus} handleDelete={removeTask} />
       <InputBar onSubmit={addTask} />
     </div>

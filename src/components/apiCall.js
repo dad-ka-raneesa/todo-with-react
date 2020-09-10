@@ -35,7 +35,7 @@ const apiCall = (action) => {
     case 'ADD_TASK':
       return fetchReq('/api/addTask', { task: action.task }, 'POST');
     default:
-      return fetchReq('/api/currentState');
+      return fetchReq('/api/initiateState');
   }
 };
 

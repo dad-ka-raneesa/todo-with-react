@@ -1,6 +1,6 @@
 const { getNextStatus, getDefaultStatus } = require('./statuses.js');
 
-const initialState = () => ({ title: 'Todo', list: [] })
+const initialState = () => ({ title: 'Todo', list: [], lastId: 0 })
 
 let todo = initialState();
 
@@ -29,15 +29,13 @@ const updateTitle = (req, res) => {
 };
 
 const addTask = (req, res) => {
-  const { list } = todo;
-  const id = list.length ? list[list.length - 1].id + 1 : 0;
+  const id = todo.lastId++;
   const item = { id: id, task: req.body.task, status: getDefaultStatus() };
   todo.list.push(item);
   res.json(todo);
 };
 
 module.exports = {
-  initiateState,
   currentState,
   removeTask,
   resetTodo,
